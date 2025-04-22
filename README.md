@@ -1,9 +1,13 @@
 # 📦 Instalação
-``` git clone https://github.com/LuisCavalari/desafio-fullcycle-node-nginx.git```
+```bash
+git clone https://github.com/LuisCavalari/desafio-fullcycle-node-nginx.git
+```
 - Rodar os containers
 
 
-``` docker compose up -d ```
+```bash
+docker compose up -d
+ ```
 
 
 - Acessar a url http://localhost:8080
@@ -14,4 +18,4 @@ O resultado esperado é algo parecido com isto
 
 # 🎯 Observação
 
-Deixei a pasta que grava os dados do mysql fora do repositorio para não ficar poluido, assim como a node_modules
+Deixei a pasta que grava os dados do mysql fora do repositorio para não ficar muito poluido
