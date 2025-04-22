@@ -1,0 +1,53 @@
+services:
+  nginx:
+    image: luiscavalari/nginx-desafio
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx-desafio
+    ports:
+      - 8080:80
+    networks:
+      - desafio-network
+    depends_on:
+      node:
+        condition: service_healthy
+  node:
+    image: luiscavalari/node-desafio
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    container_name: node-desafio
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7000"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - ./node:/app
+    networks:
+      - desafio-network
+    depends_on:
+      mysql:
+        condition: service_started
+  mysql:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    tty: true
+    container_name: db-desafio
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: node_desafio
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - desafio-network
+
+networks:
+  desafio-network:
+    driver: bridge
