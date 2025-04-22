@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
-
 RUN apk add --no-cache curl
 
 EXPOSE 7000

@@ -24,7 +24,7 @@ services:
       timeout: 5s
       retries: 3
     volumes:
-      - ./node:/app
+      - ./node:/app/
     networks:
       - desafio-network
     depends_on:
