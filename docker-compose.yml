@@ -25,6 +25,7 @@ services:
       retries: 3
     volumes:
       - ./node:/app/
+      - /app/node_modules
     networks:
       - desafio-network
     depends_on:
